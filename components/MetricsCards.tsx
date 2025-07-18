@@ -61,7 +61,7 @@ export default function MetricsCards({ data }: MetricsCardsProps) {
       
       <div className="bg-white p-6 rounded-lg shadow">
         <h3 className="text-lg font-semibold text-gray-900">Show Rate</h3>
-        <p className="text-3xl font-bold text-purple-600">{(showPercentage * 100).toFixed(1)}%</p>
+        <p className="text-3xl font-bold text-purple-600">{showPercentage.toFixed(1)}%</p>
       </div>
       
       <div className="bg-white p-6 rounded-lg shadow">
@@ -88,7 +88,7 @@ export default function MetricsCards({ data }: MetricsCardsProps) {
       
       <div className="bg-gray-50 p-6 rounded-lg shadow">
         <h3 className="text-lg font-semibold text-gray-700">Close Rate</h3>
-        <p className="text-2xl font-bold text-green-500">{(closeRate * 100).toFixed(1)}%</p>
+                 <p className="text-2xl font-bold text-green-500">{closeRate.toFixed(1)}%</p>
       </div>
       
       <div className="bg-gray-50 p-6 rounded-lg shadow">
