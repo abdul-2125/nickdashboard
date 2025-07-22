@@ -26,4 +26,23 @@ export interface DateFilter {
 export interface DateGroupedData {
   date: string
   records: SalesData[]
+}
+
+// Dashboard Data interface for reference structure
+export interface DashboardData {
+  [dateKey: string]: {
+    totalRevenue: number
+    apptsBooked: number
+    apptsConducted: number
+    newClients: number
+    rebuys: number
+    reps: {
+      [repName: string]: {
+        revenue: number
+        newClients: number
+        showRate: number
+        closeRate: number
+      }
+    }
+  }
 } 

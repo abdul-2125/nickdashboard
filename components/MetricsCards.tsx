@@ -9,19 +9,7 @@ export default function MetricsCards({ data }: MetricsCardsProps) {
     return null
   }
 
-  const teamTotal = data.find(row => row.sales_rep === 'TEAM TOTAL')
-  
-  const totals = teamTotal ? {
-    appointments_booked: teamTotal.total_appointments_booked,
-    appointments_conducted: teamTotal.total_appointments_conducted,
-    new_clients: teamTotal.total_new_clients_closed,
-    rebuys: teamTotal.total_rebuys,
-    new_revenue: teamTotal.new_client_revenue,
-    rebuy_revenue: teamTotal.rebuy_revenue,
-    total_revenue: teamTotal.total_revenue,
-    organic_clients: teamTotal.new_clients_closed_organic,
-    avg_deal: teamTotal.average_deal_size
-  } : data.reduce((acc, rep) => ({
+  const totals = data.reduce((acc, rep) => ({
     appointments_booked: acc.appointments_booked + rep.total_appointments_booked,
     appointments_conducted: acc.appointments_conducted + rep.total_appointments_conducted,
     new_clients: acc.new_clients + rep.total_new_clients_closed,
@@ -29,8 +17,7 @@ export default function MetricsCards({ data }: MetricsCardsProps) {
     new_revenue: acc.new_revenue + rep.new_client_revenue,
     rebuy_revenue: acc.rebuy_revenue + rep.rebuy_revenue,
     total_revenue: acc.total_revenue + rep.total_revenue,
-    organic_clients: acc.organic_clients + rep.new_clients_closed_organic,
-    avg_deal: acc.avg_deal + rep.average_deal_size
+    organic_clients: acc.organic_clients + rep.new_clients_closed_organic
   }), {
     appointments_booked: 0,
     appointments_conducted: 0,
@@ -39,12 +26,12 @@ export default function MetricsCards({ data }: MetricsCardsProps) {
     new_revenue: 0,
     rebuy_revenue: 0,
     total_revenue: 0,
-    organic_clients: 0,
-    avg_deal: 0
+    organic_clients: 0
   })
 
-  const showPercentage = teamTotal ? teamTotal.show_percentage : (totals.appointments_booked > 0 ? (totals.appointments_conducted / totals.appointments_booked) * 100 : 0)
-  const closeRate = teamTotal ? teamTotal.close_rate : (totals.appointments_conducted > 0 ? (totals.new_clients / totals.appointments_conducted) * 100 : 0)
+  const avgShowRate = data.length > 0 ? data.reduce((acc, rep) => acc + rep.show_percentage, 0) / data.length : 0
+  const avgCloseRate = data.length > 0 ? data.reduce((acc, rep) => acc + rep.close_rate, 0) / data.length : 0
+  const avgDealSize = data.length > 0 ? data.reduce((acc, rep) => acc + rep.average_deal_size, 0) / data.length : 0
 
   return (
     <>
@@ -61,7 +48,7 @@ export default function MetricsCards({ data }: MetricsCardsProps) {
       
       <div className="bg-white p-6 rounded-lg shadow">
         <h3 className="text-lg font-semibold text-gray-900">Show Rate</h3>
-        <p className="text-3xl font-bold text-purple-600">{showPercentage.toFixed(1)}%</p>
+        <p className="text-3xl font-bold text-purple-600">{avgShowRate.toFixed(1)}%</p>
       </div>
       
       <div className="bg-white p-6 rounded-lg shadow">
@@ -88,7 +75,7 @@ export default function MetricsCards({ data }: MetricsCardsProps) {
       
       <div className="bg-gray-50 p-6 rounded-lg shadow">
         <h3 className="text-lg font-semibold text-gray-700">Close Rate</h3>
-                 <p className="text-2xl font-bold text-green-500">{closeRate.toFixed(1)}%</p>
+                                   <p className="text-2xl font-bold text-green-500">{avgCloseRate.toFixed(1)}%</p>
       </div>
       
       <div className="bg-gray-50 p-6 rounded-lg shadow">

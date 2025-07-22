@@ -68,9 +68,9 @@ A simple sales performance dashboard built with Next.js, TypeScript, and Tailwin
 ✅ API routes (GET/POST sales data, file upload)  
 ✅ Database schema and setup SQL  
 ✅ Visual charts (bar & pie charts)  
-✅ Complete metrics display (rebuys, organic, avg deal)  
-✅ Team total aggregation  
-✅ Percentage calculations fixed  
+✅ Raw data display (no frontend calculations)  
+✅ Master summary for TEAM TOTAL data  
+✅ Simplified data flow with exact database values  
 
 ## Technology Stack
 
